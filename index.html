@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shikshak Sahyogi — Teacher Chatbot FAQ</title>
+
+<!-- ============================================================= -->
+<!--  HOW TO EDIT THIS SITE                                        -->
+<!--                                                               -->
+<!--  Everything you need to change lives in the SITE_CONFIG block -->
+<!--  below (inside the <script> tag). You do NOT need to touch    -->
+<!--  any HTML or CSS. Just edit the text between the quotes.      -->
+<!--                                                               -->
+<!--  1. To add/edit an FAQ: add or change an item in `faqs`.      -->
+<!--  2. To add/edit a feature: add or change an item in           -->
+<!--     `features`. Set "status" to "live", "building", or        -->
+<!--     "planned" and it gets the right coloured tag.             -->
+<!--  3. To turn the comment board on: follow the 3 steps in the   -->
+<!--     `comments` section (paste your Google Form links).        -->
+<!--                                                               -->
+<!--  Keep the commas and quote marks exactly as shown.            -->
+<!-- ============================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#1c1a17;
+    --ink-soft:#4a463f;
+    --paper:#f6f3ec;
+    --paper-2:#efeae0;
+    --line:#d9d2c4;
+    --accent:#3d5a4c;       /* deep green */
+    --accent-soft:#e4ebe5;
+    --live:#3d5a4c;
+    --building:#9a6a2f;
+    --planned:#6b6357;
+    --radius:14px;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    padding:0 22px 90px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto}
+
+  /* ---------- header ---------- */
+  header{padding:72px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{
+    font-family:"Newsreader",serif;font-style:italic;
+    color:var(--accent);font-size:1.02rem;letter-spacing:.01em;margin-bottom:14px;
+  }
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(2.3rem,6vw,3.4rem);line-height:1.05;
+    letter-spacing:-.015em;margin-bottom:18px;
+  }
+  .lede{font-size:1.18rem;color:var(--ink-soft);max-width:60ch}
+
+  nav{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;
+  }
+  nav a{
+    font-family:"Fraunces",serif;font-size:.82rem;font-weight:500;
+    text-decoration:none;color:var(--ink);
+    border:1px solid var(--line);border-radius:999px;
+    padding:7px 16px;background:var(--paper-2);
+    letter-spacing:.04em;text-transform:uppercase;
+    transition:all .18s ease;
+  }
+  nav a:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  /* ---------- sections ---------- */
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .sec-label{
+    font-family:"Fraunces",serif;text-transform:uppercase;
+    letter-spacing:.14em;font-size:.74rem;font-weight:600;
+    color:var(--accent);margin-bottom:10px;
+  }
+  h2{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(1.6rem,4vw,2.1rem);letter-spacing:-.01em;
+    margin-bottom:26px;line-height:1.1;
+  }
+
+  /* ---------- FAQ ---------- */
+  details{
+    border-top:1px solid var(--line);
+    padding:18px 0;
+  }
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{
+    font-family:"Fraunces",serif;font-weight:500;font-size:1.16rem;
+    cursor:pointer;list-style:none;display:flex;gap:14px;
+    align-items:baseline;color:var(--ink);
+  }
+  summary::-webkit-details-marker{display:none}
+  summary .q-mark{
+    color:var(--accent);font-style:italic;font-family:"Newsreader",serif;
+    flex:0 0 auto;
+  }
+  summary::after{
+    content:"+";margin-left:auto;color:var(--accent);
+    font-family:"Fraunces",serif;font-size:1.5rem;line-height:1;
+    transition:transform .2s ease;
+  }
+  details[open] summary::after{transform:rotate(45deg)}
+  details .answer{padding:14px 0 4px 30px;color:var(--ink-soft)}
+
+  /* ---------- features ---------- */
+  .feature{
+    display:flex;gap:16px;align-items:baseline;
+    padding:16px 0;border-top:1px solid var(--line);
+  }
+  .feature:first-child{border-top:none}
+  .feature .body{flex:1}
+  .feature h3{
+    font-family:"Fraunces",serif;font-weight:500;font-size:1.1rem;
+    margin-bottom:3px;
+  }
+  .feature p{color:var(--ink-soft);font-size:.98rem;line-height:1.55}
+  .tag{
+    font-family:"Fraunces",serif;font-size:.66rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:.1em;
+    padding:4px 10px;border-radius:999px;white-space:nowrap;
+    flex:0 0 auto;border:1px solid transparent;
+  }
+  .tag.live{background:var(--accent-soft);color:var(--live);border-color:#cdddd1}
+  .tag.building{background:#f3e9d6;color:var(--building);border-color:#e6d3ad}
+  .tag.planned{background:#eceae5;color:var(--planned);border-color:#ddd8cd}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:24px;font-size:.85rem;color:var(--ink-soft)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%}
+  .dot.live{background:var(--live)}
+  .dot.building{background:var(--building)}
+  .dot.planned{background:var(--planned)}
+
+  /* ---------- comments ---------- */
+  .ask-box{
+    background:var(--paper-2);border:1px solid var(--line);
+    border-radius:var(--radius);padding:26px;margin-bottom:30px;
+  }
+  .ask-box p{color:var(--ink-soft);margin-bottom:18px}
+  .btn{
+    display:inline-block;font-family:"Fraunces",serif;font-weight:500;
+    font-size:.95rem;text-decoration:none;color:#fff;background:var(--accent);
+    padding:12px 24px;border-radius:999px;letter-spacing:.02em;
+    transition:opacity .18s ease;border:none;cursor:pointer;
+  }
+  .btn:hover{opacity:.88}
+  .comment{
+    border-top:1px solid var(--line);padding:20px 0;
+  }
+  .comment .meta{
+    font-family:"Fraunces",serif;font-size:.78rem;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--accent);margin-bottom:6px;
+  }
+  .comment .text{color:var(--ink);margin-bottom:8px}
+  .comment .reply{
+    margin:10px 0 0 24px;padding:12px 0 0 16px;border-left:2px solid var(--accent-soft);
+    color:var(--ink-soft);font-size:.96rem;
+  }
+  .plus{
+    font-family:"Fraunces",serif;font-size:.82rem;color:var(--accent);
+    text-decoration:none;border:1px solid var(--line);border-radius:999px;
+    padding:4px 12px;display:inline-flex;gap:6px;align-items:center;
+    background:var(--paper-2);transition:all .15s ease;
+  }
+  .plus:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .comments-note{
+    font-size:.9rem;color:var(--ink-soft);font-style:italic;
+    background:var(--paper-2);border:1px dashed var(--line);
+    border-radius:var(--radius);padding:18px 20px;
+  }
+  #commentList:empty + .comments-note{display:block}
+
+  footer{padding:46px 0 0;color:var(--ink-soft);font-size:.9rem}
+  footer a{color:var(--accent)}
+
+  /* entrance */
+  .fade{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="fade">
+    <div class="kicker" id="hdrKicker"></div>
+    <h1 id="hdrTitle"></h1>
+    <p class="lede" id="hdrLede"></p>
+    <nav>
+      <a href="#what">What it does</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="#ask">Ask a question</a>
+    </nav>
+  </header>
+
+  <section id="what" class="fade" style="animation-delay:.08s">
+    <div class="sec-label">Overview</div>
+    <h2 id="aboutTitle"></h2>
+    <div id="aboutBody"></div>
+  </section>
+
+  <section id="features" class="fade" style="animation-delay:.14s">
+    <div class="sec-label">Capabilities</div>
+    <h2>Complete feature list</h2>
+    <div class="legend">
+      <span><i class="dot live"></i> In testing</span>
+      <span><i class="dot building"></i> In development</span>
+      <span><i class="dot planned"></i> Planned</span>
+    </div>
+    <div id="featureList"></div>
+  </section>
+
+  <section id="faq" class="fade" style="animation-delay:.2s">
+    <div class="sec-label">Questions</div>
+    <h2>Frequently asked</h2>
+    <div id="faqList"></div>
+  </section>
+
+  <section id="ask" class="fade" style="animation-delay:.26s">
+    <div class="sec-label">Community</div>
+    <h2>Ask a question</h2>
+    <div class="ask-box">
+      <p id="askIntro"></p>
+      <a class="btn" id="askBtn" href="#" target="_blank" rel="noopener">Ask a question</a>
+    </div>
+    <div id="commentList"></div>
+    <div class="comments-note" id="commentsNote"></div>
+  </section>
+
+  <footer class="fade" style="animation-delay:.3s">
+    <p id="footerText"></p>
+  </footer>
+
+</div>
+
+<script>
+/* ===================================================================
+   SITE_CONFIG  —  THIS IS THE ONLY PART YOU NEED TO EDIT
+   =================================================================== */
+const SITE_CONFIG = {
+
+  /* ---- Header ---- */
+  kicker: "A WhatsApp mentoring partner for teachers",
+  title: "Shikshak Sahyogi",
+  lede: "A conversational chatbot that supports teachers right inside WhatsApp — lesson plans, classroom activities, and pedagogical help, in plain language. This page answers common questions and lists what the bot can do.",
+
+  /* ---- Overview section ---- */
+  aboutTitle: "What the bot is for",
+  /* Each string below becomes its own paragraph. */
+  aboutBody: [
+    "Shikshak Sahyogi is designed to be a conversational mentoring partner for teachers. Teachers can ask, in plain language, for lesson plans, classroom activities, help with student misconceptions, support for differentiated classrooms, assessment questions, and introductory activities.",
+    "The intent is to give teachers a reliable point of support when a mentor is unavailable or absent — available on WhatsApp, an app they already use every day, with answers vetted by experts rather than generic AI responses."
+  ],
+
+  /* ---- Feature list ----
+     status can be:  "live"  |  "building"  |  "planned"          */
+  features: [
+    { name: "Conversational FLN support (Hindi)", status: "live",
+      desc: "Foundational literacy and numeracy support in Hindi, over WhatsApp and voice." },
+    { name: "Conversational FLN support (Marathi)", status: "live",
+      desc: "Foundational literacy and numeracy support in Marathi, over WhatsApp and voice." },
+    { name: "Lesson plan generation", status: "live",
+      desc: "Generates lesson plans, GRR-aligned where appropriate, with PDF output." },
+    { name: "Assessment question generation", status: "live",
+      desc: "Generates assessment questions drawn from vetted question banks." },
+    { name: "Classroom activities", status: "planned",
+      desc: "Suggests classroom activities for a given topic or learning objective." },
+    { name: "Introductory activities", status: "planned",
+      desc: "Suggests warm-up and introductory activities to open a lesson." },
+    { name: "Misconception support", status: "planned",
+      desc: "Helps a teacher address common student misconceptions in a topic." },
+    { name: "Differentiated classroom support", status: "planned",
+      desc: "Pedagogical support for teaching a mixed-level, differentiated classroom." },
+    { name: "TEACH pedagogy guidance", status: "building",
+      desc: "Pedagogical guidance via text responses; video links being integrated." },
+    { name: "Teacher question selection layer", status: "planned",
+      desc: "Teacher chooses from 10–12 questions; the chosen ones appear in the PDF." },
+    { name: "Post-call WhatsApp summary", status: "planned",
+      desc: "Automated summary sent over WhatsApp after a voice call ends." },
+    { name: "Classroom feedback loop", status: "planned",
+      desc: "Next-day follow-up with a thumbs up or down on the suggested activity." },
+    { name: "Session continuity through transcripts", status: "planned",
+      desc: "Bot maintains session transcripts and refers back to previous conversations." },
+    { name: "TEACH embedding in lesson plans", status: "planned",
+      desc: "Implicit teacher development through practice, woven into lesson plans." },
+    { name: "Multi-pedagogy support", status: "planned",
+      desc: "Bot suggests a pedagogy based on context when prompted." },
+    { name: "RCT design and deployment", status: "planned",
+      desc: "Randomised evaluation design and rollout — details being finalised." },
+    { name: "Expanded language support", status: "planned",
+      desc: "Additional state languages beyond Hindi and Marathi." }
+  ],
+
+  /* ---- FAQ ----  one object per question. */
+  faqs: [
+    { q: "When will the bot be ready for public use?",
+      a: "We're getting the content straightened out first. Tentatively, by the end of June we expect a minimal viable product (MVP) ready to test with a small group of about 20 teachers. Wider release follows once that pilot gives us confidence." },
+    { q: "How does the bot help teachers?",
+      a: "It acts as a conversational mentoring partner. Teachers can ask for lesson plans, classroom activities, help with student misconceptions, support for differentiated classrooms, assessment questions, and introductory activities — in plain language. It's meant to support teachers when a human mentor isn't available." },
+    { q: "Why a chatbot and not another app?",
+      a: "Teachers already juggle several apps, which adds cognitive load and uses up phone memory. Our bot lives on WhatsApp — an app teachers already use daily — so there's no new platform to learn. Teachers can write or speak in their own language and get an expert-vetted answer, without navigating between multiple apps." },
+    { q: "The bot isn't doing everything it promises yet — why?",
+      a: "Several capabilities are already live — conversational support in Hindi and Marathi, lesson plan generation with PDF output, and assessment questions. Others are still in development or planned, such as TEACH pedagogy guidance, post-call WhatsApp summaries, session continuity, and additional languages. We'd rather build these properly than ship them broken, so some will arrive later than others." },
+    { q: "Are my conversations with the bot private?",
+      a: "Teacher trust is central to the design. The intent is that a teacher's conversations stay private to them. (Edit this answer once your final privacy approach is confirmed.)" }
+  ],
+
+  /* ---- Ask-a-question / comment board ----
+
+     The comment board is powered by a free Google Form + Google Sheet,
+     so visitors need NO login.
+
+     SETUP (about 5 minutes, one time):
+       1. Create a Google Form with these questions:
+            - "Your name (optional)"   short answer
+            - "Your question"          paragraph
+       2. Click "Send" → copy the form link → paste it into
+          askFormUrl below.
+       3. Open the form's responses, click the green Sheets icon to
+          create a response spreadsheet. Then in that sheet:
+          File → Share → Publish to web → publish the sheet as CSV.
+          Copy the published link and paste it into sheetCsvUrl below.
+          (Leave sheetCsvUrl as "" to keep the board hidden for now.)
+
+     Replies & +1:  the simplest version is that a reply or a +1 is just
+     another form submission that references the question. For a true
+     instant +1 and threaded replies with no login, a service like
+     Cusdis or Hyvor Talk drops in here instead — ask and I'll switch it. */
+  comments: {
+    askIntro: "Have a question that isn't answered above? Submit it here and we'll add it to this page. You don't need to sign in.",
+    askFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSemHDn_5oblQ4PQhICd7BNU0Vr2UW7H8irxe24Eso2sDmdwFQ/viewform?usp=sharing&ouid=115290729331236670477",        // <-- paste your Google Form link here
+    sheetCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSpK4XVvFxYOAEMcuyVpbK1zaOF2KpZTks1IoLvZrmppPictzCZqXDGOsxaDh8HORkgoNa6i_Gia3FW/pub?gid=26374416&single=true&output=csv",       // <-- paste your published-CSV link here (optional)
+    emptyNote: "No questions posted yet. Be the first — use the button above. (Once you connect a Google Form, submitted questions will appear here.)"
+  },
+
+  /* ---- Footer ---- */
+  footerText: "Shikshak Sahyogi · internal preview · last updated June 2026. Questions? Use the form above."
+};
+/* ===================================================================
+   END OF SITE_CONFIG — you do not need to edit anything below.
+   =================================================================== */
+
+
+/* ---------- render (do not edit) ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+$('hdrKicker').textContent = SITE_CONFIG.kicker;
+$('hdrTitle').textContent = SITE_CONFIG.title;
+$('hdrLede').textContent = SITE_CONFIG.lede;
+$('aboutTitle').textContent = SITE_CONFIG.aboutTitle;
+$('aboutBody').innerHTML = SITE_CONFIG.aboutBody
+  .map(p => `<p style="margin-bottom:16px;color:var(--ink-soft)">${esc(p)}</p>`).join('');
+$('footerText').textContent = SITE_CONFIG.footerText;
+
+/* features */
+const statusLabel = {live:"In testing", building:"In development", planned:"Planned"};
+$('featureList').innerHTML = SITE_CONFIG.features.map(f => `
+  <div class="feature">
+    <div class="body">
+      <h3>${esc(f.name)}</h3>
+      <p>${esc(f.desc)}</p>
+    </div>
+    <span class="tag ${f.status}">${statusLabel[f.status]||f.status}</span>
+  </div>`).join('');
+
+/* faq */
+$('faqList').innerHTML = SITE_CONFIG.faqs.map(f => `
+  <details>
+    <summary><span class="q-mark">Q.</span><span>${esc(f.q)}</span></summary>
+    <div class="answer">${esc(f.a)}</div>
+  </details>`).join('');
+
+/* ask + comments */
+const C = SITE_CONFIG.comments;
+$('askIntro').textContent = C.askIntro;
+const askBtn = $('askBtn');
+if (C.askFormUrl) { askBtn.href = C.askFormUrl; }
+else { askBtn.removeAttribute('href'); askBtn.style.opacity=".5"; askBtn.style.cursor="not-allowed";
+       askBtn.title="Add your Google Form link in SITE_CONFIG to enable this."; }
+
+$('commentsNote').textContent = C.emptyNote;
+
+/* If a published-CSV sheet link is provided, load and show submitted questions. */
+if (C.sheetCsvUrl) {
+  fetch(C.sheetCsvUrl).then(r => r.text()).then(csv => {
+    const rows = parseCSV(csv);
+    if (rows.length <= 1) return;             // header only
+    const out = rows.slice(1).reverse().map(cols => {
+      // Expected columns: [timestamp, name, question]
+      const name = (cols[1]||"Anonymous").trim() || "Anonymous";
+      const q = (cols[2]||"").trim();
+      if (!q) return "";
+      return `<div class="comment">
+                <div class="meta">${esc(name)}</div>
+                <div class="text">${esc(q)}</div>
+              </div>`;
+    }).join('');
+    if (out) { $('commentList').innerHTML = out; $('commentsNote').style.display="none"; }
+  }).catch(()=>{/* leave the empty note in place */});
+}
+
+/* tiny CSV parser (handles quoted fields) */
+function parseCSV(text){
+  const rows=[];let row=[],val="",q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){ if(c=='"'){ if(text[i+1]=='"'){val+='"';i++;} else q=false; } else val+=c; }
+    else { if(c=='"')q=true; else if(c==',' ){row.push(val);val="";}
+           else if(c=='\n'){row.push(val);rows.push(row);row=[];val="";}
+           else if(c=='\r'){} else val+=c; } }
+  if(val.length||row.length){row.push(val);rows.push(row);}
+  return rows;
+}
+</script>
+</body>
+</html>
